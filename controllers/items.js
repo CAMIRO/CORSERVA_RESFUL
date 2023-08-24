@@ -48,14 +48,14 @@ exports.createItem = (req, res, next) => {
 exports.updateItem = (req, res, next) => {
     const itemId = req.params.itemId;
     const updateName = req.body.name
-    const updateDecription = req.body.description
+    const updateDescription = req.body.description
     Item.findByPk(itemId)
         .then(item =>{
             if(!Item){
                 return  res.status(404).json({message: 'Item not found!'})
             }
             item.name = updateName
-            item.description = updateDecription
+            item.description = updateDescription
             return item.save()
         })
         .then(result =>{

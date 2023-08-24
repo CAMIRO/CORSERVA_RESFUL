@@ -2,7 +2,6 @@
 const express = require('express')
 const bodyparser = require('body-parser')
 const sequelize = require('./util/database')
-// const Item = require('./models/item')
 
 const app = express()
 
@@ -14,12 +13,6 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
     next()
 })
-
-
-// const PORT = 5000;
-// app.listen(PORT, () =>{
-//     console.log(`Server is running on port  ${PORT}`)
-// })
 
 app.get('/', (req, res, next)=>{
     res.send('hello world!')
