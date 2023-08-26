@@ -27,7 +27,7 @@ const Item = db.define('item', {
     allowNull: true,
     validate: {
       isValidDescription (value) {
-        const schema = Joi.string().min(10).max(200).required()
+        const schema = Joi.string().min(4).max(200).required()
         const { error } = schema.validate(value)
         if (error) {
           throw new Error('Invalid description')
