@@ -1,20 +1,20 @@
 const express = require('express')
-const bodyparser = require('body-parser')
+const bodyParser = require('body-parser')
 const sequelize = require('./util/database')
 
 const app = express()
 
-app.use(bodyparser.json())
-app.use(bodyparser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-origin', '*')
+  res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
   next()
 })
 
 app.get('/', (req, res, next) => {
-  res.send('hello world!')
+  res.send('Hello world!')
 })
 
 // CRUD routes
@@ -22,7 +22,7 @@ app.use('/items', require('./routes/items'))
 
 // error handling
 app.use((error, req, res, next) => {
-  console.log(error)
+  console.error(error)
   const status = error.statusCode || 500
   const message = error.message
   res.status(status).json({ message })

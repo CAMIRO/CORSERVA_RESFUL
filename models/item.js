@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize')
+const Joi = require('joi')
 const db = require('../util/database')
 
 const Item = db.define('item', {
@@ -8,8 +9,32 @@ const Item = db.define('item', {
     allowNull: false,
     primaryKey: true
   },
-  name: Sequelize.STRING,
-  description: Sequelize.STRING
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      isValidName (value) {
+        const schema = Joi.string().min(3).max(50).required()
+        const { error } = schema.validate(value)
+        if (error) {
+          throw new Error('invalid name')
+        }
+      }
+    }
+  },
+  description: {
+    type: Sequelize.STRING,
+    allowNull: true,
+    validate: {
+      isValidDescription (value) {
+        const schema = Joi.string().min(10).max(200).required()
+        const { error } = schema.validate(value)
+        if (error) {
+          throw new Error('Invalid description')
+        }
+      }
+    }
+  }
 })
 
 module.exports = Item
