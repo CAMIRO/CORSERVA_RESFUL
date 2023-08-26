@@ -9,5 +9,4 @@ router.post('/', controller.createItem)
 router.put('/:itemId', controller.updateItem)
 router.delete('/:itemId', controller.deleteItem)
 
-
-module.exports = router;
+module.exports = router
